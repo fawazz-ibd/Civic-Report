@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaporKota | Laporan Warga</title>
+  
+  <!-- CDN SUPABASE RESMI -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Navbar Utama (Hanya 1 Navbar) -->
+  <header class="navbar">
+    <a class="logo" href="#beranda">🏙️ LaporKota</a>
+    <nav>
+      <a href="#beranda">Beranda</a>
+      <a href="#laporan">Laporan</a>
+      <a href="#statistik">Statistik</a>
+    </nav>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button class="btn" id="openForm">+ Buat Laporan</button>
+      <!-- Tombol Admin & User Warga akan otomatis disisipkan di sini oleh script.js -->
+      <div id="navAuthContainer" style="display: flex; gap: 8px;"></div>
+    </div>
+  </header>
+
+  <section class="hero" id="beranda">
+    <div class="hero-content">
+      <h1>Laporkan Masalah di Kotamu!</h1>
+      <p>Sampaikan laporan tentang jalan rusak, sampah, dan fasilitas umum dengan mudah.</p>
+      <button class="btn" id="heroButton">Buat Laporan Sekarang →</button>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="categories">
+      <button class="category" data-category="Jalan Rusak">🛣️ Jalan Rusak</button>
+      <button class="category" data-category="Sampah">♻️ Sampah</button>
+      <button class="category" data-category="Fasilitas Umum">🏞️ Fasilitas Umum</button>
+      <button class="category" data-category="Lainnya">📌 Lainnya</button>
+    </section>
+
+    <div class="layout">
+      <section id="laporan">
+        <h2>Laporan Warga</h2>
+        <input id="search" class="search" type="search" placeholder="Cari laporan...">
+        <div id="reportList" class="report-list"></div>
+      </section>
+
+      <aside>
+        <section class="panel" id="statistik">
+          <h2>📊 Statistik Laporan</h2>
+          <div class="stats">
+            <div><strong id="total">0</strong><small>Total</small></div>
+            <div><strong id="process">0</strong><small>Diproses</small></div>
+            <div><strong id="done">0</strong><small>Selesai</small></div>
+          </div>
+        </section>
+
+        <!-- PANEL NOTIFIKASI WARGA -->
+        <section class="panel" id="notifikasiPanel">
+          <h2>🔔 Notifikasi Warga</h2>
+          <div id="notificationList" class="notification-list"></div>
+        </section>
+
+        <section class="panel">
+          <h2>📍 Tentang LaporKota</h2>
+          <p>LaporKota membantu warga mencatat dan memantau laporan masalah lingkungan.</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>© 2026 LaporKota — Suara Anda, Kota Kita</footer>
+
+  <!-- Modal Buat Laporan Baru -->
+  <div class="modal" id="reportModal">
+    <div class="modal-content" id="reportForm">
+      <button type="button" id="closeForm" class="close">×</button>
+      <h2>Buat Laporan Baru</h2>
+
+      <label for="title">Judul laporan</label>
+      <input id="title" required maxlength="100" placeholder="Contoh: Jalan berlubang">
+
+      <label for="category">Kategori</label>
+      <select id="category" required>
+        <option value="">Pilih kategori</option>
+        <option value="Jalan Rusak">Jalan Rusak</option>
+        <option value="Sampah">Sampah</option>
+        <option value="Fasilitas Umum">Fasilitas Umum</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
+
+      <label for="location">Lokasi</label>
+      <input id="location" required maxlength="150" placeholder="Nama jalan atau area">
+
+      <label for="description">Deskripsi</label>
+      <textarea id="description" required maxlength="500" placeholder="Jelaskan masalahnya..."></textarea>
+
+      <label for="photo">Foto bukti (opsional)</label>
+      <input id="photo" type="file" accept="image/*">
+
+      <button class="btn submit-btn" type="button" id="submitBtn">Kirim Laporan</button>
+    </div>
+  </div>
+
+</body>
+</html>
